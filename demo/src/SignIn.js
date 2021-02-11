@@ -13,6 +13,7 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import { CodeSharp } from '@material-ui/icons';
+import { useHistory } from 'react-router-dom';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -39,7 +40,7 @@ export default function SignIn() {
 
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
-
+    const path = useHistory()
     const classes = useStyles();
 
     const submitForm = (e) => {
@@ -49,6 +50,7 @@ export default function SignIn() {
     }
 
     const fetchLoginAPI = () => {
+        
         const requestOptions = {
             method: 'POST',
             headers: {
@@ -62,6 +64,7 @@ export default function SignIn() {
         fetch('http://localhost:9000/login', requestOptions)
             .then(res => res.json())
             .then(res => console.log('response :', res))
+            .then(res => path.push('/home'))
     };
 
 

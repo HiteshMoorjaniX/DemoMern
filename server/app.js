@@ -27,6 +27,8 @@ db.on('open', () => {
 const loginRouter = require('./routes/login')
 app.use('/login', loginRouter)
 
+const registerRouter = require('./routes/register')
+app.use('/register', registerRouter)
 
 
 app.listen(port, () => {

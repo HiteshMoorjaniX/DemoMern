@@ -19,8 +19,11 @@ loginRouter.post('/', async(req,res) => {
     }
     const result = await loginSchema.findOne(loginQuery)
     console.log(result);
-    if(result != null) res.json('Login Successful')
-    else res.json('Login failed pls provide valid credentials')
+    res.send({
+        data : result
+    })
+    // if(result != null) res.json('Login Successful')
+    // else res.json('Login failed pls provide valid credentials')
 
     // const saveData = new loginSchema({
     //     username : req.body.username,

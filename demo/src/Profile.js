@@ -2,6 +2,7 @@ import { Avatar, Button, Container, CssBaseline, makeStyles, Snackbar, TextField
 import PersonIcon from '@material-ui/icons/Person';
 import { Alert } from '@material-ui/lab';
 import React, { useContext, useEffect, useState } from 'react'
+import { Redirect } from 'react-router-dom';
 import { UserContext } from './UserContext';
 
 const useStyles = makeStyles((theme) => ({
@@ -25,6 +26,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function Profile() {
+
     const [firstname, setFirstname] = useState('')
     const [lastname, setLastname] = useState('')
     const [password, setPassword] = useState('')
@@ -43,6 +45,7 @@ export default function Profile() {
     }
 
     useEffect(() => {
+        
         console.log('renders once')
 
         const requestOptions = {
@@ -96,6 +99,7 @@ export default function Profile() {
 
     return (
         <div>
+            {userId == null ? <Redirect to = "/login" /> : false}
             <Container component="main" maxWidth="xs">
                 <CssBaseline />
                 <div className={classes.paper}>

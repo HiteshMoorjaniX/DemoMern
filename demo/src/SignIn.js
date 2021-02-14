@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -13,6 +13,7 @@ import Container from '@material-ui/core/Container';
 import { Link, useHistory } from 'react-router-dom';
 import { Alert } from '@material-ui/lab';
 import { Snackbar } from '@material-ui/core';
+import { UserContext } from './UserContext';
 
 
 
@@ -37,7 +38,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function SignIn() {
-
+    const [userId,setUserId] = useContext(UserContext)
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
     const [open, setOpen] = useState(false)
@@ -76,6 +77,8 @@ export default function SignIn() {
             .then(res => res.json())
             .then(res => {
                 if (res.data != null) {
+                    localStorage.setItem('userId',username)
+                    setUserId(localStorage.getItem('userId'))
                     path.push('/home')
                 }
                 else {

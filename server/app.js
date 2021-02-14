@@ -30,6 +30,8 @@ app.use('/login', loginRouter)
 const registerRouter = require('./routes/register')
 app.use('/register', registerRouter)
 
+const profileRouter = require('./routes/profile')
+app.use('/profile', profileRouter)
 
 app.listen(port, () => {
     console.log('Node js app started running')

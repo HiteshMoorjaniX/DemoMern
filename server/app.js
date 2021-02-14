@@ -9,7 +9,7 @@ const url = 'mongodb://localhost/demodb'
 app.use(express.json())
 app.use(cors())
 
-mongoose.connect(url, {useNewUrlParser: true, useUnifiedTopology: true})
+mongoose.connect(url, {useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify : false})
 .catch(error => console.error(error));
 
 const db = mongoose.connection

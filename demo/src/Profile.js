@@ -1,5 +1,6 @@
-import { Avatar, Button, Container, CssBaseline, makeStyles, TextField, Typography } from '@material-ui/core'
+import { Avatar, Button, Container, CssBaseline, makeStyles, Snackbar, TextField, Typography } from '@material-ui/core'
 import PersonIcon from '@material-ui/icons/Person';
+import { Alert } from '@material-ui/lab';
 import React, { useContext, useEffect, useState } from 'react'
 import { UserContext } from './UserContext';
 
@@ -28,13 +29,22 @@ export default function Profile() {
     const [lastname, setLastname] = useState('')
     const [password, setPassword] = useState('')
 
-    const [userId,setUserId] = useContext(UserContext)
+    const [open, setOpen] = useState(false)
+
+    const [userId, setUserId] = useContext(UserContext)
 
     const classes = useStyles();
 
+    const handleClose = (event, reason) => {
+        if (reason === 'clickaway') {
+            return;
+        }
+        setOpen(false);
+    }
+
     useEffect(() => {
         console.log('renders once')
-        
+
         const requestOptions = {
             method: 'POST',
             headers: {
@@ -42,7 +52,7 @@ export default function Profile() {
                 'Accept': 'application/json'
             },
             body: JSON.stringify({
-                userId : userId
+                userId: userId
             })
         }
 
@@ -55,16 +65,33 @@ export default function Profile() {
                 setPassword(res.data.password)
             })
             .catch(err => console.log(err))
-        
 
-        // setFirstname('jiial')
-        // setLastname('jaldj')
-        // setPassword('ksdjkljaslf')
-    },[])
+    }, [])
 
     const submitForm = (e) => {
         e.preventDefault()
         console.log('submittedd')
+
+        const requestOptions = {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
+            },
+            body: JSON.stringify({
+                username: userId,
+                firstname: firstname,
+                lastname: lastname,
+                password: password
+            })
+        }
+
+        fetch('http://localhost:9000/profile/update', requestOptions)
+            .then(res => res.json())
+            .then(res => {
+                setOpen(true)
+            })
+            .catch(err => console.log(err))
     }
 
     return (
@@ -79,8 +106,8 @@ export default function Profile() {
                         Update Profile
         </Typography>
                     <form className={classes.form} noValidate>
-                        
-                    <TextField
+
+                        <TextField
                             variant="outlined"
                             margin="normal"
                             required
@@ -130,6 +157,16 @@ export default function Profile() {
                             Save
           </Button>
                     </form>
+
+                    <Snackbar anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
+                        open={open}
+                        autoHideDuration={3000}
+                        onClose={handleClose}>
+
+                        <Alert onClose={handleClose} severity="success">
+                            Profile Updated Sucessfully
+                    </Alert>
+                    </Snackbar>
 
                 </div>
 

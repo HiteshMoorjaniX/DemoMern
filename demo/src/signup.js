@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useState } from 'react';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -35,7 +35,6 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function Signup() {
-    const nodeRef = useRef(false);
 
     const [firstname, setFirstname] = useState('')
     const [lastname, setLastname] = useState('')
@@ -169,7 +168,7 @@ export default function Signup() {
                         </Grid>
                     </form>
 
-                    <Snackbar ref={nodeRef} anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
+                    <Snackbar anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
                         open={open}
                         autoHideDuration={3000}
                         onClose={handleClose}>

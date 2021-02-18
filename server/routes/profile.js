@@ -47,4 +47,22 @@ catch (err) {
     console.error('ERROR : ', err)
 }
 
+
+try {
+    profileRouter.get('/studentlist', async (req, res) => {
+        console.log('inside student list api');
+
+        const result = await userSchema.find()
+        res.json(result)
+        
+        // Later Change it to returns all the user except from one (From that is being called)
+
+    })
+}
+catch (err) {
+    console.error('ERROR : ', err)
+}
+
+
+
 module.exports = profileRouter

@@ -8,6 +8,7 @@ import SignIn from './SignIn';
 import Signup from './signup'
 import { UserProvider } from './UserContext';
 import Profile from './Profile';
+import StudentsList from './StudentsList';
 
 
 function App() {
@@ -34,6 +35,8 @@ function App() {
               <Route exact path = '/signup' component={Signup} />
               <Route exact path = '/home' component={Home} />
               <Route exact path = '/profile' component={Profile} />
+              <Route exact path = '/studentslist' component={StudentsList} />
+              
               {/* <Route exact path='/footer' component={Footer} /> */}
 
             </Switch>
